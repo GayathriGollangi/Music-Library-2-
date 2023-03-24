@@ -40,7 +40,7 @@ public class SongH2Service implements SongRepository{
     @Override
     public Song getSongById(int songId) {
 		try{
-            Song song = db.queryForObject("select * from playlist where id = ?",new SongRowMapper(),songId);
+            Song song = db.queryForObject("select * from playlist where songId = ?",new SongRowMapper(),songId);
             return song;
         }
         catch(Exception e){
@@ -63,23 +63,23 @@ public class SongH2Service implements SongRepository{
     @Override
     public Song updateSong(int songId, Song song) {
         if(song.getSongName() != null){
-            db.update("update playlist set songName = ? where id = ?", song.getSongName(), songId);
+            db.update("update playlist set songName = ? where songId = ?", song.getSongName(), songId);
         }
         if(song.getLyricist() !=null){
-            db.update("update playlist set lyricist = ? where id = ?", song.getLyricist(), songId);
+            db.update("update playlist set lyricist = ? where songId = ?", song.getLyricist(), songId);
         }
         if(song.getSinger() != null){
-            db.update("update playlist set singer = ? where id = ?", song.getSinger(),songId);
+            db.update("update playlist set singer = ? where songId = ?", song.getSinger(),songId);
         }
         if(song.getMusicDirector() != null){
-            db.update("update playlist set musicDirector = ? where id = ?", song.getMusicDirector(),songId);
+            db.update("update playlist set musicDirector = ? where songId = ?", song.getMusicDirector(),songId);
 
         }
         return getSongById(songId);
             }
     @Override
     public void deleteSong(int songId) {
-        db.update("delete from playlist where id =?",songId);
+        db.update("delete from playlist where songId =?",songId);
     }
 }
 
